@@ -1,14 +1,14 @@
+# Dependencies
 /node_modules/
-/report
 
-# Logs
-/logs
-*.log
+# Build output
+/dist
 
 # VSCode
 /.vscode/*
 !/.vscode/settings.json
 
-# dotenv environment variables file
-.env
-.env.test
+# Misc
+/report
+/logs
+*.log

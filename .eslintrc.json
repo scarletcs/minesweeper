@@ -5,5 +5,13 @@
   ],
   "rules": {
     "semi": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "@typescript-eslint/recommended"
+      ]
+    }
+  ]
 }
