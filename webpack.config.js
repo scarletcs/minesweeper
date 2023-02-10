@@ -61,7 +61,11 @@ const uiConfig = {
       patterns: [
         {
           context: './src/ui',
-          from: '**/*.html', 
+          from: '**/*.html',
+        },
+        {
+          context: './src/ui',
+          from: 'assets/**/*',
         }
       ]
     }),
