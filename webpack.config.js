@@ -1,9 +1,9 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const isProduction = process.env.NODE_ENV == 'production';
+const isDevelopment = process.env.NODE_ENV == 'development';
 
-const mode = isProduction ? 'production' : 'development';
+const mode = isDevelopment ? 'development' : 'production';
 
 const stylesHandler = 'style-loader';
 
@@ -38,6 +38,7 @@ const mainConfig = {
   entry: './src/main/index.ts',
   target: 'electron-main',
   mode,
+  devtool: 'source-map',
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist/main'),
@@ -50,6 +51,7 @@ const uiConfig = {
   entry: './src/ui/index.tsx',
   target: 'electron-renderer',
   mode,
+  devtool: 'source-map',
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist/ui'),
