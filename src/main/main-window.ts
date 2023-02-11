@@ -26,12 +26,12 @@ export class MainWindow {
       if (!this.window?.isVisible()) {
         this.window?.show();
       }
+      this.window?.webContents.openDevTools({
+        mode: 'detach'
+      });
     });
 
     this.window.removeMenu();
-    this.window?.webContents.openDevTools({
-      mode: 'detach'
-    });
     this.window.loadFile('../ui/index.html');
   }
 

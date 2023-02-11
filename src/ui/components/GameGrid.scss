@@ -3,6 +3,6 @@
 
   display: grid;
   gap: 4px;
-  grid-template-columns: repeat(var(--xmax), min-content);
-  grid-template-rows: repeat(var(--ymax), min-content);
+  grid-template-columns: repeat(var(--cells-x), min-content);
+  grid-template-rows: repeat(var(--cells-y), min-content);
 }

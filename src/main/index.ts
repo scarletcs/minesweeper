@@ -10,6 +10,7 @@ app.whenReady().then(() => {
         ...details.responseHeaders,
         "Content-Security-Policy": `
           default-src 'self' 'unsafe-inline';
+          script-src 'self' 'unsafe-inline' 'unsafe-eval';
           img-src 'self' data:;
         `,
       }
