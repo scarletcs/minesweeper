@@ -1,0 +1,14 @@
+.Box {
+  --size: var(--tile-size);
+
+  background: unset;
+  border-radius: 4px;
+  border: 2px solid black;
+  width: var(--size);
+  height: var(--size);
+  
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}

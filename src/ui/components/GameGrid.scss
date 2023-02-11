@@ -1,0 +1,8 @@
+.GameGrid {
+  --tile-size: 40px;
+
+  display: grid;
+  gap: 4px;
+  grid-template-columns: repeat(var(--xmax), min-content);
+  grid-template-rows: repeat(var(--ymax), min-content);
+}
