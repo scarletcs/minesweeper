@@ -4,6 +4,7 @@ import { endGame } from "./actions/endGame";
 import { toggleFlag } from "./actions/toggleFlag";
 import { GameStatus, GameState, Vector2 } from "../models";
 import { restartGame } from "./actions/restartGame";
+import { createMines } from "./actions/createMines";
 
 const initialGameState: GameState = {
   status: GameStatus.NotStarted,
@@ -39,6 +40,12 @@ export type GameStateAction = (
     type: 'revealPlace',
     /** The coordinates to reveal. */
     position: Vector2
+  } |
+  {
+    /** Create the mines, if they don't already exist. */
+    type: 'createMines',
+    /** The origin position that the player clicked. This position will be guaranteed safe. */
+    origin: Vector2,
   }
 );
 
@@ -73,6 +80,8 @@ export const GameStateReducer: GameStateReducerFn = (state: GameState, action: G
       return restartGame(state, action);
     case 'toggleFlag':
       return toggleFlag(state, action);
+    case 'createMines':
+      return createMines(state, action);
     case 'revealPlace': {
       return {
         ...state

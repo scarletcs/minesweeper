@@ -1,26 +1,31 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Box } from './Box';
-import { GameState, GameStatus, Place } from '../../models';
+import { coord, GameState, GameStatus, Place } from '../../models';
 import { RequireSome } from '../../util/types';
 import { GameStateContext } from '../../reducers/GameState';
 
-const createGameStateContext = (x: number, y: number, data: Omit<Place, 'position'>, gameState?: Partial<GameState>) => {
+const createGameStateContext = (x: number, y: number, placeConfig?: Partial<Omit<Place, 'position'>>, gameState?: Partial<GameState>) => {
   const place: Place = {
     position: { x, y },
-    ...data
+    hasMine: false,
+    hasFlag: false,
+    revealed: false,
+    adjacentMineCount: 0,
+    ...(placeConfig ?? {})
   };
   const state: RequireSome<GameState, 'places'> = {
     status: GameStatus.Started,
     places: new Map(),
     ...(gameState ?? {})
   };
-  state.places.set(`${x},${y}`, place);
+  state.places.set(coord(x, y), place);
 
   return { state, dispatch: (action: any) => null };
 };
 
 it('renders a button', () => {
+  const gameStateContext = createGameStateContext(0, 0);
 
   const box = render(
     <GameStateContext.Provider value={gameStateContext}>
@@ -34,7 +39,7 @@ it('renders a button', () => {
 
 it('renders a blank revealed tile', () => {
   const gameStateContext = createGameStateContext(0, 0,
-    { hasMine: false, hasFlag: false, revealed: true });
+    { revealed: true });
 
   const box = render(
     <GameStateContext.Provider value={gameStateContext}>
@@ -48,7 +53,7 @@ it('renders a blank revealed tile', () => {
 
 it('renders a flag on a flagged tile', () => {
   const gameStateContext = createGameStateContext(0, 0,
-    { hasMine: false, hasFlag: true, revealed: false });
+    { hasFlag: true });
 
   const box = render(
     <GameStateContext.Provider value={gameStateContext}>
@@ -62,7 +67,7 @@ it('renders a flag on a flagged tile', () => {
 
 it('renders an explosion on a revealed mine tile', () => {
   const gameStateContext = createGameStateContext(0, 0,
-    { hasMine: true, hasFlag: false, revealed: true });
+    { hasMine: true, revealed: true });
 
   const box = render(
     <GameStateContext.Provider value={gameStateContext}>
@@ -76,7 +81,7 @@ it('renders an explosion on a revealed mine tile', () => {
 
 it('renders a mine on an unrevealed mine tile during defeat', () => {
   const gameStateContext = createGameStateContext(0, 0,
-    { hasMine: true, hasFlag: false, revealed: false },
+    { hasMine: true },
     { status: GameStatus.Defeat });
 
   const box = render(

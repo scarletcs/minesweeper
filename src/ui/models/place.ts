@@ -17,4 +17,8 @@ export interface Place {
    * Whether this place is revealed.
    */
   revealed: boolean;
+  /**
+   * The number of mines around this location.
+   */
+  adjacentMineCount: number;
 }

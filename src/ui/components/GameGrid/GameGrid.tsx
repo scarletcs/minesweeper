@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+import { coord } from '../../models';
 import { useGameState } from "../../reducers/hooks/useGameState";
 import { MathUtil } from '../../util/math';
 import { Box } from '../Box';
@@ -26,7 +27,7 @@ export const GameGrid = ({}: Props) => {
       {
         MathUtil.range(0, size.y - 1).map(y =>
           MathUtil.range(0, size.x - 1).map(x =>
-            <Box key={`${x},${y}`} x={x} y={y} />
+            <Box key={coord(x, y)} x={x} y={y} />
           )
         )
       }

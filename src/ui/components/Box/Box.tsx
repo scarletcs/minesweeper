@@ -6,8 +6,9 @@ import Explosion from '../../assets/game/crowned-explosion.svg';
 import { useGameState } from '../../reducers/hooks/useGameState';
 import { useRevealPlace } from '../../reducers/hooks/useRevealPlace';
 import { useToggleFlag } from '../../reducers/hooks/useToggleFlag';
-import { GameStatus } from '../../models';
+import { coord, GameStatus } from '../../models';
 import classNames from 'classnames';
+import { useCreateMines } from '../../reducers/hooks/useCreateMines';
 
 type Props = {
   x: number,
@@ -16,11 +17,13 @@ type Props = {
 
 export const Box = ({ x, y }: Props) => {
   const gameState = useGameState()!;
+  const createMines = useCreateMines();
   const revealPlace = useRevealPlace();
   const toggleFlag = useToggleFlag();
-
+  
   /** The place this box represents. */
-  const place = gameState.places!.get(`${x},${y}`)!;
+  const place = gameState.places!.get(coord(x, y))!;
+  const position = { x, y };
 
   /** True if the player is defeated. */
   const isDefeat = gameState.status === GameStatus.Defeat;
@@ -30,20 +33,23 @@ export const Box = ({ x, y }: Props) => {
   /** Show an explosion on this location. Oh no! */
   const showExplosion = place.hasMine && place.revealed;
   /** Show a mine on this location. */
-  const showMine = place.hasMine && !place.revealed && isDefeat;
+  const showMine = place.hasMine && (!place.revealed && isDefeat);
 
   /** Show that the user made a mistake here. */
   const highlightError = isDefeat && ((place.hasFlag && !place.hasMine) || (place.revealed && place.hasMine));
   
   const reveal: MouseEventHandler = (event) => {
     if (event.button === 0) {
-      revealPlace({ x, y });
+      if (!gameState.minesPlanted) {
+        createMines(position);
+      }
+      revealPlace(position);
     }
   };
 
   const flag: MouseEventHandler = (event) => {
     if (event.button === 2) {
-      toggleFlag({ x, y });
+      toggleFlag(position);
     }
   }
 
