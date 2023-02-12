@@ -65,15 +65,20 @@ export const Box = ({ x, y }: Props) => {
   const hasError = (place.hasFlag && !place.hasMine) || (place.revealed && place.hasMine);
 
   let content: React.ReactNode | null = null;
+  let has: string | null = null;
 
   if (place.hasMine && place.revealed) {
+    has = 'explosion';
     content = <Icon src={Explosion} className="explosion" alt="explosion" />;
   } else if (place.hasFlag) {
+    has = 'flag';
     content = <Icon src={Flag} className="flag" alt="flag" />;
   } else if (place.hasMine && !place.revealed && isDefeated) {
     // Reveal mines at the end.
+    has = 'mine';
     content = <Icon src={Mine} className="mine" alt="mine" />;
   } else if (place.revealed && place.adjacentMineCount > 0) {
+    has = 'warning';
     content = <span className="warning">{ place.adjacentMineCount }</span>;
   }
 
@@ -82,7 +87,8 @@ export const Box = ({ x, y }: Props) => {
       type="button"
       className={classNames('Box', {
         error: isDefeated && hasError,
-        revealed: place.revealed
+        revealed: place.revealed,
+        [`has-${has}`]: has,
       })}
       data-x={x} // just for debug purposes
       data-y={y}

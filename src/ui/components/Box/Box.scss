@@ -1,7 +1,6 @@
 .Box {
   --size: var(--tile-size);
 
-  background: unset;
   border-radius: 4px;
   border: 2px solid var(--box-border);
   display: flex;
@@ -12,6 +11,19 @@
 
   &:not(.revealed) {
     background: var(--box-border)
+  }
+
+  &.error:not(.has-flag) {
+    background: var(--box-error);
+  }
+
+  &.error.has-flag .Icon {
+    color: var(--box-error);
+  }
+
+  &.has-flag,
+  &.has-mine {
+    padding: 4px;
   }
   
   .Icon {
