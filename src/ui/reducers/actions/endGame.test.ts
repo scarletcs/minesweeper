@@ -8,7 +8,7 @@ beforeEach(() => {
   Settings.now = () => now;
 });
 
-test(`ends the game`, () => {
+it(`ends the game`, () => {
   const status = GameStatus.Defeat;
   const startedAt = DateTime.fromObject({ year: 2023, month: 1, day: 1 });
 

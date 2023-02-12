@@ -1,9 +1,9 @@
 {
-  "Jest test": {
+  "Jest it": {
     "scope": "typescript,typescriptreact",
-    "prefix": "test",
+    "prefix": "it",
     "body": [
-      "test(`$1`, () => {",
+      "it(`$1`, () => {",
       "  $0",
       "});",
     ],

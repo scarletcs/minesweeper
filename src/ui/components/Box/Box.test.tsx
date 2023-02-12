@@ -20,9 +20,7 @@ const createGameStateContext = (x: number, y: number, data: Omit<Place, 'positio
   return { state, dispatch: (action: any) => null };
 };
 
-test('renders a button', () => {
-  const gameStateContext = createGameStateContext(0, 0,
-    { hasMine: false, hasFlag: false, revealed: false });
+it('renders a button', () => {
 
   const box = render(
     <GameStateContext.Provider value={gameStateContext}>
@@ -34,7 +32,7 @@ test('renders a button', () => {
   expect(button).toBeDefined();
 });
 
-test('renders a blank revealed tile', () => {
+it('renders a blank revealed tile', () => {
   const gameStateContext = createGameStateContext(0, 0,
     { hasMine: false, hasFlag: false, revealed: true });
 
@@ -48,7 +46,7 @@ test('renders a blank revealed tile', () => {
   expect(button.childNodes.length).toBe(0);
 });
 
-test('renders a flag on a flagged tile', () => {
+it('renders a flag on a flagged tile', () => {
   const gameStateContext = createGameStateContext(0, 0,
     { hasMine: false, hasFlag: true, revealed: false });
 
@@ -62,7 +60,7 @@ test('renders a flag on a flagged tile', () => {
   expect(image).toBeDefined();
 });
 
-test('renders an explosion on a revealed mine tile', () => {
+it('renders an explosion on a revealed mine tile', () => {
   const gameStateContext = createGameStateContext(0, 0,
     { hasMine: true, hasFlag: false, revealed: true });
 
@@ -76,7 +74,7 @@ test('renders an explosion on a revealed mine tile', () => {
   expect(image).toBeDefined();
 });
 
-test('renders a mine on an unrevealed mine tile during defeat', () => {
+it('renders a mine on an unrevealed mine tile during defeat', () => {
   const gameStateContext = createGameStateContext(0, 0,
     { hasMine: true, hasFlag: false, revealed: false },
     { status: GameStatus.Defeat });

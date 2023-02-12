@@ -9,7 +9,7 @@ beforeEach(() => {
   Settings.now = () => now;
 });
 
-test(`generates a game`, () => {
+it(`generates a game`, () => {
   const mineCount = 5;
   const size = { x: 8, y: 8 };
 
@@ -25,7 +25,7 @@ test(`generates a game`, () => {
   expect(state.places).toBeDefined();
 });
 
-test(`creates places properly`, () => {
+it(`creates places properly`, () => {
   const mineCount = 5;
   const size = { x: 8, y: 8 };
 

@@ -8,7 +8,7 @@ beforeEach(() => {
   state0 = startGame({ status: GameStatus.Started }, { type: 'startGame', size: { x: 10, y: 10 }, mineCount: 5 });
 });
 
-test(`applies a flag`, () => {
+it(`applies a flag`, () => {
   const position = { x: 1, y: 2 };
 
   const state = toggleFlag(state0, { type: 'toggleFlag', position });
@@ -18,7 +18,7 @@ test(`applies a flag`, () => {
   expect(places.find(p => p.hasFlag)?.position).toEqual(position); // it's at the position we marked
 });
 
-test(`applies a second flag`, () => {
+it(`applies a second flag`, () => {
   const pos1 = { x: 1, y: 2 };
   const pos2 = { x: 4, y: 7 };
 
@@ -35,7 +35,7 @@ test(`applies a second flag`, () => {
 });
 
 
-test(`removes a flag`, () => {
+it(`removes a flag`, () => {
   const position = { x: 1, y: 2 };
 
   const state1 = toggleFlag(state0, { type: 'toggleFlag', position });

@@ -1,10 +1,12 @@
 import { DateTime } from 'luxon';
+import { MathUtil } from '../util/math';
 import { GameStatus } from './game-status';
-import { Place } from './place';
-import { SerializedVector2, Vector2 } from './vector2';
+import { PlaceMap } from './place-map';
+import { Vector2 } from './vector2';
 
-export type PlaceMap = Map<SerializedVector2, Place>;
-
+/**
+ * The core game state of the application.
+ */
 export type GameState = {
   status: GameStatus;
   size?: Vector2;
