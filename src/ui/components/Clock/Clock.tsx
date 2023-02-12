@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Clock.scss';
 import { DateTime } from 'luxon';
 import Stopwatch from '../../assets/game/stopwatch.svg';
+import { Icon } from '../Icon';
 
 type Props = {
   startTime?: DateTime;
@@ -27,7 +28,7 @@ export const Clock = ({ startTime, endTime }: Props) => {
 
   return (
     <div className="Clock">
-      <img src={Stopwatch} />
+      <Icon src={Stopwatch} />
       <span>
         { time }
       </span>
