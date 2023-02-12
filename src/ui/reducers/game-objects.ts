@@ -13,25 +13,47 @@ export interface Vector2 {
  */
 export type SerializedVector2 = `${number},${number}`;
 
+export interface Place {
+  /**
+   * The position this data represents.
+   */
+  position: Vector2;
+  /**
+   * Whether there is a mine here. (Ssh!)
+   */
+  hasMine: boolean;
+  /**
+   * Whether a flag has been placed here.
+   */
+  hasFlag: boolean;
+  /**
+   * Whether this place is revealed.
+   */
+  revealed: boolean;
+}
+
 /**
  * The current status of the game.
  */
 export enum GameStatus {
   /** The game has not yet started. */
   NotStarted = 'not-started',
-  /** The game is ongoing. No wins or losses yet. */
-  Ongoing = 'ongoing',
+  /** The game has started and is ongoing. */
+  Started = 'ongoing',
   /** The player has won. */
-  Win = 'win',
+  Victory = 'victory',
   /** The player has hit a mine and lost. */
-  Loss = 'lose',
+  Defeat = 'defeat',
 }
+
+export type PlaceMap = Map<SerializedVector2, Place>;
 
 export type GameState = {
   status: GameStatus;
   size?: Vector2;
-  mines?: Set<SerializedVector2>;
-  flags?: Set<SerializedVector2>;
+  mineCount?: number;
+  minesPlanted?: boolean;
+  places?: PlaceMap;
   startedAt?: DateTime;
   endedAt?: DateTime;
-}
+};

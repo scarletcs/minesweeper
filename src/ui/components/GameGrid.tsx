@@ -8,24 +8,24 @@ type Props = {
 };
 
 export const GameGrid = ({}: Props) => {
-  const gameState = useGameState();
+  const gameState = useGameState()!;
 
-  if (!gameState) {
+  if (!gameState || !gameState.size) {
     return null;
   }
 
-  const { width, height } = gameState.size;
+  const size = gameState.size;
 
   const style = {
-    '--cells-x': gameState.size.width,
-    '--cells-y': gameState.size.height,
+    '--cells-x': size.x,
+    '--cells-y': size.y,
   } as CSSProperties;
 
   return (
     <div className="GameGrid" style={style}>
       {
-        MathUtil.range(0, width - 1).map(y =>
-          MathUtil.range(0, height - 1).map(x =>
+        MathUtil.range(0, size.y - 1).map(y =>
+          MathUtil.range(0, size.x - 1).map(x =>
             <Box key={`${x},${y}`} x={x} y={y} />
           )
         )

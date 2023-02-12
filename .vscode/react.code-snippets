@@ -1,0 +1,27 @@
+{
+  "React component": {
+    "scope": "typescriptreact",
+    "prefix": "component",
+    "description": "A basic definition for a React component file",
+    "body": [
+      "import React from 'react';",
+      "",
+      "type Props = {",
+      "};",
+      "",
+      "export const ${1:ComponentName} = ({}: Props) => {",
+      "  $0",
+      "",
+      "  return (",
+      "    <div></div>",
+      "  );",
+      "};"
+    ],
+  },
+  "React state": {
+    "scope": "typescriptreact",
+    "prefix": "state",
+    "description": "A useState shortcut",
+    "body": "const [${1:name}, set${1/(.*)/${1:/capitalize}/}] = useState($0);",
+  }
+}

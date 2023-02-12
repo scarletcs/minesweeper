@@ -3,6 +3,7 @@ import { startGame } from "./actions/startGame";
 import { endGame } from "./actions/endGame";
 import { toggleFlag } from "./actions/toggleFlag";
 import { GameStatus, GameState, Vector2 } from "./game-objects";
+import { restartGame } from "./actions/restartGame";
 
 const initialGameState: GameState = {
   status: GameStatus.NotStarted,
@@ -21,7 +22,11 @@ export type GameStateAction = (
     /** Set the current status of the game. Use this to set a win/loss condition. */
     type: 'endGame',
     /** The final state. */
-    status: (GameStatus.Win | GameStatus.Loss)
+    status: (GameStatus.Victory | GameStatus.Defeat)
+  } |
+  {
+    /** Set the current status of the game. Use this to set a win/loss condition. */
+    type: 'restartGame',
   } |
   {
     /** Place or remove a flag. */
@@ -64,6 +69,8 @@ export const GameStateReducer: GameStateReducerFn = (state: GameState, action: G
       return startGame(state, action);
     case 'endGame':
       return endGame(state, action);
+    case 'restartGame':
+      return restartGame(state, action);
     case 'toggleFlag':
       return toggleFlag(state, action);
     case 'revealPlace': {

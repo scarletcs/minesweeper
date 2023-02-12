@@ -1,0 +1,38 @@
+{
+  "Jest test": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "test",
+    "body": [
+      "test(`$1`, () => {",
+      "  $0",
+      "});",
+    ],
+  },
+  "Jest describe": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "describe",
+    "body": [
+      "describe(`$1`, () => {",
+      "  $0",
+      "});",
+    ],
+  },
+  "Jest beforeEach": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "beforeEach",
+    "body": [
+      "beforeEach(() => {",
+      "  $0",
+      "});",
+    ],
+  },
+  "Jest afterEach": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "afterEach",
+    "body": [
+      "afterEach(() => {",
+      "  $0",
+      "});",
+    ],
+  }
+}

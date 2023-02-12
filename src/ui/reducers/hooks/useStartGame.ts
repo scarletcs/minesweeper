@@ -3,21 +3,20 @@ import { Vector2 } from "../game-objects";
 import { GameStateContext } from "../GameState";
 
 /**
- * Get an action that toggles a flag.
- * @returns The action to toggle a flag
+ * Get an action that starts the game.
  */
-
-export const useToggleFlag = () => {
+export const useStartGame = () => {
   const context = useContext(GameStateContext);
   if (!context) {
     throw Error('No game state');
   }
   /**
-   * Toggle the flag at a position.
-   * @param position The flag position.
+   * Start the game.
+   * @param mineCount The number of mines.
+   * @param size The size of the map.
    */
-  return (position: Vector2) => {
+  return (mineCount: number, size: Vector2) => {
     const { dispatch } = context;
-    dispatch({ type: 'toggleFlag', position });
+    dispatch({ type: 'startGame', mineCount, size });
   };
 };

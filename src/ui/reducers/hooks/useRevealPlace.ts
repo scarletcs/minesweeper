@@ -4,7 +4,6 @@ import { GameStateContext } from "../GameState";
 
 /**
  * Get an action that reveals a place.
- * @returns The place to reveal.
  */
 
 export const useRevealPlace = () => {
