@@ -1,20 +1,20 @@
 import { useContext } from "react";
-import { Vector2 } from "../../models";
+import { GameStatus } from "../../models";
 import { GameStateContext } from "../GameState";
 
 /**
- * Get an action that creates the mines.
+ * Get an action that ends the game.
  */
-export const useCreateMines = () => {
+export const useEndGame = () => {
   const context = useContext(GameStateContext);
   if (!context) {
     throw Error('No game state');
   }
   /**
-   * Create the mines.
+   * Create mines.
    */
-  return (origin: Vector2) => {
+  return (status: GameStatus.Victory | GameStatus.Defeat) => {
     const { dispatch } = context;
-    dispatch({ type: 'createMines', origin });
+    dispatch({ type: 'endGame', status });
   };
 };

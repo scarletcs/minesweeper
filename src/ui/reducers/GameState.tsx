@@ -5,6 +5,7 @@ import { toggleFlag } from "./actions/toggleFlag";
 import { GameStatus, GameState, Vector2 } from "../models";
 import { restartGame } from "./actions/restartGame";
 import { createMines } from "./actions/createMines";
+import { revealPlace } from "./actions/revealPlace";
 
 const initialGameState: GameState = {
   status: GameStatus.NotStarted,
@@ -83,9 +84,7 @@ export const GameStateReducer: GameStateReducerFn = (state: GameState, action: G
     case 'createMines':
       return createMines(state, action);
     case 'revealPlace': {
-      return {
-        ...state
-      };
+      return revealPlace(state, action);
     }
   }
 }

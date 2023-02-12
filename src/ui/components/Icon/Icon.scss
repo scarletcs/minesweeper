@@ -1,0 +1,13 @@
+.Icon {
+  background-color: currentColor;
+  display: inline-block;
+  // TODO figure out vendor autoprefixing
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  width: 1em;
+  height: 1em;
+}

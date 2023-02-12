@@ -9,6 +9,8 @@ import { useToggleFlag } from '../../reducers/hooks/useToggleFlag';
 import { coord, GameStatus } from '../../models';
 import classNames from 'classnames';
 import { useCreateMines } from '../../reducers/hooks/useCreateMines';
+import { useEndGame } from '../../reducers/hooks/useEndGame';
+import { Icon } from '../Icon';
 
 type Props = {
   x: number,
@@ -20,6 +22,8 @@ export const Box = ({ x, y }: Props) => {
   const createMines = useCreateMines();
   const revealPlace = useRevealPlace();
   const toggleFlag = useToggleFlag();
+  const endGame = useEndGame();
+  const gameOngoing = gameState.status === GameStatus.Started;
   
   /** The place this box represents. */
   const place = gameState.places!.get(coord(x, y))!;
@@ -37,17 +41,31 @@ export const Box = ({ x, y }: Props) => {
 
   /** Show that the user made a mistake here. */
   const highlightError = isDefeat && ((place.hasFlag && !place.hasMine) || (place.revealed && place.hasMine));
+
+  const canReveal = (!place.revealed && !place.hasFlag && gameOngoing);
+  const canModifyFlag = (!place.revealed && gameOngoing);
   
   const reveal: MouseEventHandler = (event) => {
+    if (!canReveal) {
+      return;
+    }
+
     if (event.button === 0) {
       if (!gameState.minesPlanted) {
         createMines(position);
       }
       revealPlace(position);
+      if (place.hasMine) {
+        endGame(GameStatus.Defeat);
+      }
     }
   };
 
   const flag: MouseEventHandler = (event) => {
+    if (!canModifyFlag) {
+      return;
+    }
+
     if (event.button === 2) {
       toggleFlag(position);
     }
@@ -56,15 +74,19 @@ export const Box = ({ x, y }: Props) => {
   return (
     <button
       type="button"
-      className={classNames('Box', { error: highlightError })}
+      className={classNames('Box', {
+        error: highlightError,
+        revealed: place.revealed
+      })}
       data-x={x} // just for debug purposes
       data-y={y}
+      disabled={!canReveal}
       onClick={reveal}
       onContextMenu={flag}
     >
-      { showFlag ? <img src={Flag} alt="flag" /> : null }
-      { showMine ? <img src={Mine} alt="mine" /> : null }
-      { showExplosion ? <img src={Explosion} alt="explosion" /> : null }
+      { showFlag ? <Icon src={Flag} alt="flag" /> : null }
+      { showMine ? <Icon src={Mine} alt="mine" /> : null }
+      { showExplosion ? <Icon src={Explosion} alt="explosion" /> : null }
     </button>
   );
 };

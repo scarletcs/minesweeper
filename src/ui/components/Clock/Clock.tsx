@@ -20,6 +20,7 @@ export const Clock = ({ startTime, endTime }: Props) => {
   }
 
   setTimeout(() => {
+    // TODO fix ticks?
     redraw(tick + 1)
   }, 1000);
 
