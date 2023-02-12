@@ -5,7 +5,7 @@ import { Navigator } from './screens/Navigator';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App screen">
       <GameStateProvider>
         <Navigator />
       </GameStateProvider>

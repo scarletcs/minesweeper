@@ -1,5 +1,20 @@
 .GameScreen {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+
   .sidebar {
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+
+    margin-left: 40px;
     color: var(--text-color);
+
+    .button {
+      padding: 8px 12px;
+      font-size: 16px;
+    }
   }
 }

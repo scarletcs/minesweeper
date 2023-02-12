@@ -1,0 +1,13 @@
+.ChooseDifficulty {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 100vh;
+
+  .button {
+    padding: 40px;
+    font-size: 24px;
+  }
+}

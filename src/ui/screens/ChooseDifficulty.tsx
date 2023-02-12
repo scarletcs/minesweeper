@@ -1,4 +1,5 @@
 import React from 'react';
+import './ChooseDifficulty.scss';
 import { useStartGame } from '../reducers/hooks/useStartGame';
 
 type Props = {
@@ -8,18 +9,20 @@ export const ChooseDifficulty = ({}: Props) => {
   const startGame = useStartGame();
 
   return (
-    <div>
+    <div className="ChooseDifficulty screen">
       <button
         type="button"
+        className="button"
         onClick={() => startGame(10, { x: 8, y: 8 })}
       >
         8x8, 10 mines
       </button>
       <button
         type="button"
-        onClick={() => startGame(40, { x: 16, y: 16 })}
+        className="button"
+        onClick={() => startGame(30, { x: 12, y: 12 })}
       >
-        16x16, 40 mines
+        12x12, 30 mines
       </button>
     </div>
   );

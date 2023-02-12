@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import './GameScreen.scss';
 import { Clock } from '../components/Clock';
 import { GameGrid } from '../components/GameGrid';
 import { GameStatus } from '../models';
@@ -11,8 +12,16 @@ type Props = {
 
 export const GameScreen = ({}: Props) => {
   const gameState = useGameState()!;
+  const [flagCount, setFlagCount] = useState(0);
   const restartGame = useRestartGame();
   const endGame = useEndGame();
+
+  useEffect(() => {
+    if (gameState.places) {
+      const flags = [...gameState.places.values()].filter(p => p.hasFlag).length;
+      setFlagCount(flags);
+    }
+  }, [gameState.places])
 
   // Watch for victory
   useEffect(() => {
@@ -35,14 +44,20 @@ export const GameScreen = ({}: Props) => {
   }, [ gameState.places, gameState.status ]);
 
   return (
-    <div className="GameScreen">
+    <div className="GameScreen screen">
       <GameGrid />
       <aside className="sidebar">
-        <button type="button" onClick={restartGame}>Restart game</button>
         <Clock startTime={gameState.startedAt} endTime={gameState.endedAt} />
+        <div>
+          { flagCount } flags planted
+        </div>
+        <div>
+          { gameState.mineCount } mines
+        </div>
         <div>
           Game status: { gameState.status }
         </div>
+        <button type="button" className="button" onClick={restartGame}>Restart game</button>
       </aside>
     </div>
   );

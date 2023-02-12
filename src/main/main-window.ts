@@ -14,7 +14,7 @@ export class MainWindow {
 
     this.window = new BrowserWindow({
       width: 800,
-      height: 800,
+      height: 600,
     });
 
     this.window.on('close', () => {
