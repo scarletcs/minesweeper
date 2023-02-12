@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Clock.scss';
 import { DateTime } from 'luxon';
 import Stopwatch from '../../assets/game/stopwatch.svg';
@@ -19,10 +19,11 @@ export const Clock = ({ startTime, endTime }: Props) => {
     time = diff.toFormat('mm:ss');
   }
 
-  setTimeout(() => {
-    // TODO fix ticks?
-    redraw(tick + 1)
-  }, 1000);
+  useEffect(() => {
+    setTimeout(() => {
+      redraw(tick + 1)
+    }, 1000);
+  }, [tick]);
 
   return (
     <div className="Clock">
