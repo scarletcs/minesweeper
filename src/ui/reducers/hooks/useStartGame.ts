@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Vector2 } from "../game-objects";
+import { Vector2 } from "../../models";
 import { GameStateContext } from "../GameState";
 
 /**

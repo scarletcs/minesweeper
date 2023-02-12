@@ -1,4 +1,4 @@
-import { GameStatus } from "../game-objects";
+import { GameStatus } from "../../models";
 import { GameStateReducerFn } from "../GameState";
 
 export const restartGame: GameStateReducerFn<'restartGame'> = (state, action) => {

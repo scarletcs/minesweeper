@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from "react";
 import { startGame } from "./actions/startGame";
 import { endGame } from "./actions/endGame";
 import { toggleFlag } from "./actions/toggleFlag";
-import { GameStatus, GameState, Vector2 } from "./game-objects";
+import { GameStatus, GameState, Vector2 } from "../models";
 import { restartGame } from "./actions/restartGame";
 
 const initialGameState: GameState = {

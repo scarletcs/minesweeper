@@ -1,5 +1,5 @@
 import React from 'react';
-import { GameStatus } from '../reducers/game-objects';
+import { GameStatus } from '../models';
 import { useGameState } from '../reducers/hooks/useGameState';
 import { ChooseDifficulty } from './ChooseDifficulty';
 import { GameScreen } from './GameScreen';

@@ -1,4 +1,4 @@
-import { GameStatus, SerializedVector2 } from "../game-objects";
+import { GameStatus, SerializedVector2 } from "../../models";
 import { DateTime, Settings } from 'luxon';
 import { startGame } from "./startGame";
 import { MathUtil } from "../../util/math";

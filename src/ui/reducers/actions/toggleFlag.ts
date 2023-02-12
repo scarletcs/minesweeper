@@ -1,5 +1,5 @@
 import { SetUtil } from "../../util/set";
-import { SerializedVector2 } from "../game-objects";
+import { SerializedVector2 } from "../../models";
 import { GameStateReducerFn } from "../GameState";
 
 export const toggleFlag: GameStateReducerFn<'toggleFlag'> = (state, action) => {

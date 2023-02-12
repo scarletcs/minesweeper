@@ -1,4 +1,4 @@
-import { GameStatus } from "../game-objects";
+import { GameStatus } from "../../models";
 import { restartGame } from "./restartGame";
 import { startGame } from "./startGame";
 

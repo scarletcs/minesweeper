@@ -1,4 +1,4 @@
-import { GameStatus } from "../game-objects";
+import { GameStatus } from "../../models";
 import { DateTime, Settings } from 'luxon';
 import { endGame } from "./endGame";
 

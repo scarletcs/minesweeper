@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { GameStatus, Place, PlaceMap, Vector2 } from "../game-objects";
+import { GameStatus, Place, PlaceMap, Vector2 } from "../../models";
 import { GameStateReducerFn } from "../GameState";
 
 const createPlaces = (size: Vector2): PlaceMap => {
