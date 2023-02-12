@@ -28,20 +28,7 @@ export const Box = ({ x, y }: Props) => {
   /** The place this box represents. */
   const place = gameState.places!.get(coord(x, y))!;
   const position = { x, y };
-
-  /** True if the player is defeated. */
-  const isDefeat = gameState.status === GameStatus.Defeat;
-
-  /** Show a flag on this location. */
-  const showFlag = place.hasFlag;
-  /** Show an explosion on this location. Oh no! */
-  const showExplosion = place.hasMine && place.revealed;
-  /** Show a mine on this location. */
-  const showMine = place.hasMine && (!place.revealed && isDefeat);
-
-  /** Show that the user made a mistake here. */
-  const highlightError = isDefeat && ((place.hasFlag && !place.hasMine) || (place.revealed && place.hasMine));
-
+  
   const canReveal = (!place.revealed && !place.hasFlag && gameOngoing);
   const canModifyFlag = (!place.revealed && gameOngoing);
   
@@ -65,17 +52,36 @@ export const Box = ({ x, y }: Props) => {
     if (!canModifyFlag) {
       return;
     }
-
+    
     if (event.button === 2) {
       toggleFlag(position);
     }
+  }
+
+  /** True if the player is defeated. */
+  const isDefeated = gameState.status === GameStatus.Defeat;
+
+  /** The user's made a mistake here. We'll present this during defeat.. */
+  const hasError = (place.hasFlag && !place.hasMine) || (place.revealed && place.hasMine);
+
+  let content: React.ReactNode | null = null;
+
+  if (place.hasMine && place.revealed) {
+    content = <Icon src={Explosion} className="explosion" alt="explosion" />;
+  } else if (place.hasFlag) {
+    content = <Icon src={Flag} className="flag" alt="flag" />;
+  } else if (place.hasMine && !place.revealed && isDefeated) {
+    // Reveal mines at the end.
+    content = <Icon src={Mine} className="mine" alt="mine" />;
+  } else if (place.revealed && place.adjacentMineCount > 0) {
+    content = <span className="warning">{ place.adjacentMineCount }</span>;
   }
 
   return (
     <button
       type="button"
       className={classNames('Box', {
-        error: highlightError,
+        error: isDefeated && hasError,
         revealed: place.revealed
       })}
       data-x={x} // just for debug purposes
@@ -84,9 +90,7 @@ export const Box = ({ x, y }: Props) => {
       onClick={reveal}
       onContextMenu={flag}
     >
-      { showFlag ? <Icon src={Flag} alt="flag" /> : null }
-      { showMine ? <Icon src={Mine} alt="mine" /> : null }
-      { showExplosion ? <Icon src={Explosion} alt="explosion" /> : null }
+      { content }
     </button>
   );
 };

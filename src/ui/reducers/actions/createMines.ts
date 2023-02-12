@@ -1,6 +1,7 @@
 import { getAdjacentPlaces } from "../tools/get-adjacent-places";
 import { MathUtil } from "../../util/math";
 import { GameStateReducerFn } from "../GameState";
+import { Place } from "../../models";
 
 export const createMines: GameStateReducerFn<'createMines'> = (state, action) => {
   if (state.minesPlanted) {
@@ -19,12 +20,11 @@ export const createMines: GameStateReducerFn<'createMines'> = (state, action) =>
   const originPlace = places.get(`${origin.x},${origin.y}`);
   const originAdjacent = getAdjacentPlaces(places, origin);
 
-  let mines = 0;
-  /** Places to permanently skip, starting with the origin and the tiles around it. */
   const skip = [originPlace, ...originAdjacent];
   const possibilities = [...places.values()].filter(p => !skip.includes(p));
+  const mines: Place[] = [];
 
-  while (mines < state.mineCount && possibilities.length > 0) {
+  while (mines.length < state.mineCount && possibilities.length > 0) {
     const index = MathUtil.pickRandomIndex(possibilities);
     const [place] = possibilities.splice(index, 1);
     const adjacent = getAdjacentPlaces(places, place.position);
@@ -38,8 +38,13 @@ export const createMines: GameStateReducerFn<'createMines'> = (state, action) =>
     adjacent.forEach(a => {
       a.adjacentMineCount++;
     });
-    mines++;
+    mines.push(place);
   }
+
+  // Cleanup
+  mines.forEach(p => {
+    p.adjacentMineCount = 0;
+  });
 
   return {
     ...state,

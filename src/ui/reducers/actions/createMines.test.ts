@@ -16,7 +16,7 @@ it(`places the asked-for number of mines`, () => {
   expect(list.filter(p => p.hasMine)).toHaveLength(mineCount);
 });
 
-fit(`places as many mines as it can, then gives up if it hits a limit`, () => {
+it(`places as many mines as it can, then gives up if it hits a limit`, () => {
   const mineCount = 8;
   const origin = { x: 1, y: 1 };
   const size = { x: 4, y: 3 };
@@ -37,6 +37,26 @@ fit(`places as many mines as it can, then gives up if it hits a limit`, () => {
   expect(state1.places?.get(`${3},${0}`)?.hasMine).toBeTruthy();
   expect(state1.places?.get(`${3},${1}`)?.hasMine).toBeTruthy();
   expect(state1.places?.get(`${3},${2}`)?.hasMine).toBeTruthy();
+});
+
+it(`always leaves adjacent count as 0 for places with a mine`, () => {
+  const mineCount = 8;
+  const origin = { x: 1, y: 1 };
+  const size = { x: 4, y: 3 };
+
+  const state0 = startGame({ status: GameStatus.Defeat }, { type: 'startGame', size, mineCount });
+  const state1 = createMines(state0, { type: 'createMines', origin });
+
+  /*
+  This state should look like:
+  o o o X
+  o O o X
+  o o o X
+  */
+
+  const places = state1.places!;
+  const list = [...places.values()];
+  expect(list.filter(p => p.hasMine && p.adjacentMineCount > 0)).toHaveLength(0);
 });
 
 it(`will place mines anywhere but the origin & its surrounds`, () => {
@@ -87,22 +107,20 @@ it(`will mark surrounding mine count on tiles properly`, () => {
   expect(state1.minesPlanted).toBeTruthy();
   const places = state1.places!;
   
-  const expectations = {
-    [coord(0,0)]: 0,
-    [coord(1,0)]: 0,
-    [coord(0,1)]: 0,
-    [coord(1,1)]: 0,
-    [coord(2,0)]: 2,
-    [coord(2,1)]: 3,
-    [coord(2,2)]: 5,
-    [coord(1,2)]: 3,
-    [coord(0,2)]: 2
-  }
+  const expectations = [
+    { pos: coord(0,0), count: 0 },
+    { pos: coord(1,0), count: 0 },
+    { pos: coord(0,1), count: 0 },
+    { pos: coord(1,1), count: 0 },
+    { pos: coord(2,0), count: 2 },
+    { pos: coord(2,1), count: 3 },
+    { pos: coord(2,2), count: 5 },
+    { pos: coord(1,2), count: 3 },
+    { pos: coord(0,2), count: 2 },
+  ];
 
-  for (const place of places.values()) {
-    const pos = place.position;
-    const c = coord(pos);
-    const expected = expectations[c];
-    expect({ pos, count: place.adjacentMineCount }).toEqual({ pos, count: expected });
-  }  
+  for (const { pos, count } of expectations) {
+    const place = places.get(pos)!;
+    expect({ pos, count: place.adjacentMineCount }).toEqual({ pos, count });
+  }
 });

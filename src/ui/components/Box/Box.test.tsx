@@ -61,8 +61,8 @@ it('renders a flag on a flagged tile', () => {
     </GameStateContext.Provider>
   );
 
-  const image = screen.getByAltText('flag');
-  expect(image).toBeDefined();
+  const image = screen.getByRole('image');
+  expect(image.classList).toContain('flag')
 });
 
 it('renders an explosion on a revealed mine tile', () => {
@@ -75,8 +75,8 @@ it('renders an explosion on a revealed mine tile', () => {
     </GameStateContext.Provider>
   );
 
-  const image = screen.getByAltText('explosion');
-  expect(image).toBeDefined();
+  const image = screen.getByRole('image');
+  expect(image.classList).toContain('explosion')
 });
 
 it('renders a mine on an unrevealed mine tile during defeat', () => {
@@ -90,6 +90,6 @@ it('renders a mine on an unrevealed mine tile during defeat', () => {
     </GameStateContext.Provider>
   );
 
-  const image = screen.getByAltText('mine');
-  expect(image).toBeDefined();
+  const image = screen.getByRole('image');
+  expect(image.classList).toContain('mine')
 });

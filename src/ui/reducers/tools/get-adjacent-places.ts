@@ -4,9 +4,7 @@ import { coord, Vector2 } from '../../models/vector2';
 import { PlaceMap } from '../../models/place-map';
 
 /**
- * Find the places around a given position.
- *
- * Returns up to eight places. If the position is on an edge, it will return fewer.
+ * Find the up-to-eight places around a given position, both linearly and diagonally.
  *
  * @param map The map to explore
  * @param position The center position to find the places around
@@ -18,8 +16,8 @@ export function getAdjacentPlaces(map: PlaceMap, position: Vector2): Place[] {
     throw Error(`The requested position is not on the map.`, { cause: { map, position }});
   }
 
+  const places: Place[] = [];
   const diffs = MathUtil.range(-1, +1);
-  let places: Place[] = [];
 
   for (const dy of diffs) {
     for (const dx of diffs) {
