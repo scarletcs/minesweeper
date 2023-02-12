@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Clock.scss';
 import { DateTime } from 'luxon';
-import Stopwatch from '../assets/game/stopwatch.svg';
+import Stopwatch from '../../assets/game/stopwatch.svg';
 
 type Props = {
   startTime?: DateTime;

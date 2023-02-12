@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Box } from './Box';
-import { GameState, GameStatus, Place, SerializedVector2 } from '../models';
-import { RequireSome } from '../util/types';
-import { GameStateContext } from '../reducers/GameState';
+import { GameState, GameStatus, Place } from '../../models';
+import { RequireSome } from '../../util/types';
+import { GameStateContext } from '../../reducers/GameState';
 
 const createGameStateContext = (x: number, y: number, data: Omit<Place, 'position'>, gameState?: Partial<GameState>) => {
   const place: Place = {

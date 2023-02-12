@@ -1,12 +1,12 @@
 import React, { MouseEventHandler } from 'react';
 import './Box.scss';
-import Flag from '../assets/game/flying-flag.svg';
-import Mine from '../assets/game/unlit-bomb.svg';
-import Explosion from '../assets/game/crowned-explosion.svg';
-import { useGameState } from '../reducers/hooks/useGameState';
-import { useRevealPlace } from '../reducers/hooks/useRevealPlace';
-import { useToggleFlag } from '../reducers/hooks/useToggleFlag';
-import { GameStatus } from '../models';
+import Flag from '../../assets/game/flying-flag.svg';
+import Mine from '../../assets/game/unlit-bomb.svg';
+import Explosion from '../../assets/game/crowned-explosion.svg';
+import { useGameState } from '../../reducers/hooks/useGameState';
+import { useRevealPlace } from '../../reducers/hooks/useRevealPlace';
+import { useToggleFlag } from '../../reducers/hooks/useToggleFlag';
+import { GameStatus } from '../../models';
 import classNames from 'classnames';
 
 type Props = {

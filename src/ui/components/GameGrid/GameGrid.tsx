@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
-import { useGameState } from "../reducers/hooks/useGameState";
-import { MathUtil } from '../util/math';
-import { Box } from './Box';
+import { useGameState } from "../../reducers/hooks/useGameState";
+import { MathUtil } from '../../util/math';
+import { Box } from '../Box';
 import './GameGrid.scss';
 
 type Props = {
