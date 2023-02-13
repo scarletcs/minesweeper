@@ -1,4 +1,5 @@
-import { app, session } from 'electron';
+import { app, Menu, session } from 'electron';
+import { HighScoreWindow } from './high-score-window';
 import { MainWindow } from './main-window';
 
 app.disableHardwareAcceleration();
@@ -18,6 +19,21 @@ app.whenReady().then(() => {
   });
 
   const main = new MainWindow();
+  const highScores = new HighScoreWindow();
+
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'Game',
+      submenu: [
+        { label: 'New Game', click: () => null },
+        { label: 'High Scores', click: () => highScores.open() },
+        { type: 'separator' },
+        { role: 'quit' },
+      ]
+    }
+  ]);
+  Menu.setApplicationMenu(menu);
+
   main.open();
 });
 

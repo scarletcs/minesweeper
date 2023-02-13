@@ -7,10 +7,12 @@
   .sidebar {
     display: flex;
     flex-flow: column;
+    text-align: center;
     gap: 16px;
 
     margin-left: 40px;
     color: var(--text-color);
+    width: 200px;
 
     .button {
       padding: 8px 12px;

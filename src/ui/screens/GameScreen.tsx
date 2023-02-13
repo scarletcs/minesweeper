@@ -57,7 +57,7 @@ export const GameScreen = ({}: Props) => {
         <div>
           Game status: { gameState.status }
         </div>
-        <button type="button" className="button" onClick={restartGame}>Restart game</button>
+        <button type="button" className="button" onClick={restartGame}>New game</button>
       </aside>
     </div>
   );

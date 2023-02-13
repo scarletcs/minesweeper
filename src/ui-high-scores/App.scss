@@ -1,0 +1,44 @@
+.App {
+  background: var(--background);
+  color: var(--text-color);
+  height: 100vh;
+}
+
+header {
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.emblem {
+  width: 60px;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  line-height: 1em;
+}
+
+.list {
+  display: table;
+  width: 80%;
+  border-spacing: 10px;
+  margin: 0 auto;
+}
+
+.entry {
+  display: table-row;
+}
+
+.counter,
+.name,
+.time {
+  display: table-cell;
+}
+
+.time {
+  text-align: right;
+}

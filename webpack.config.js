@@ -74,6 +74,15 @@ const uiConfig = {
   resolve: base.resolve,
 };
 
+const uiHighScoresConfig = {
+  ...uiConfig,
+  entry: './src/ui-high-scores/index.tsx',
+  output: {
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist/ui-high-scores'),
+  },
+}
+
 module.exports = () => {
-  return [ mainConfig, uiConfig ];
+  return [ mainConfig, uiConfig, uiHighScoresConfig ];
 };

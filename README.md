@@ -22,3 +22,4 @@ Image assets were by Lorc, licensed under CC BY 3.0:
 - Explosion icon: https://game-icons.net/1x1/lorc/crowned-explosion.html
 - Flag icon: https://game-icons.net/1x1/lorc/flying-flag.html
 - Stopwatch icon: https://game-icons.net/1x1/lorc/stopwatch.html
+- Trophy icon: https://game-icons.net/1x1/lorc/holy-grail.html

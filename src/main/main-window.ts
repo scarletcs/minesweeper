@@ -15,6 +15,7 @@ export class MainWindow {
     this.window = new BrowserWindow({
       width: 800,
       height: 600,
+      center: true,
     });
 
     this.window.on('close', () => {
@@ -31,7 +32,6 @@ export class MainWindow {
       });
     });
 
-    this.window.removeMenu();
     this.window.loadFile('../ui/index.html');
   }
 
